@@ -1,0 +1,29 @@
+{% extends 'basexml.html' %}
+
+{% block content %}
+  <h2>Lista de Archivos XML</h2>
+  <a class="btn" href="{% url 'xmlfile_create' %}">Crear nuevo archivo XML</a>
+  <table class="striped">
+    <thead>
+      <tr>
+          <th>Archivo XML</th>
+          <th>Ver contenido</th>
+          <th>Editar contenido</th>
+          <th>Descargar XML</th>
+          <th>Eliminar XML</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in files %}
+      <tr>
+        <td>{{ file.name }}</td>
+        <td><a class="btn orange darken-4" href="{% url 'xmlfile_detail' file.pk %}">Detalles</a></td>
+        <td><a class="btn pink darken-4" href="{% url 'xmlfile_edit' file.pk %}">Editar</a></td>
+        <td><a class="btn lime darken-4" href="{% url 'xmlfile_download' file.pk %}">Descargar</a></td>
+        <td><a class="btn red darken-4" href="{% url 'xmlfile_delete' file.pk %}">Eliminar</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a class="btn light-blue accent-4" href="{% url 'xmlfile_upload' %}">Subir nuevo archivo XML</a>
+{% endblock %}

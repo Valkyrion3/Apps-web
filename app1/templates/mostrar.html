@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="container center"><h1>Panes registrados</h1></div>
+    <table class="striped green lighten-5">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Sabor</th>
+            <th>Precio</th>
+            <th>Disponibilidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pan in panes %}
+            <tr>
+            <td>{{pan.id}}</td>
+            <td>{{pan.nombre}}</td>
+            <td>{{pan.sabor}}</td>
+            <td>${{pan.precio}}</td>
+            {% if pan.activo %}
+                <td>Disponible</td>
+            {% else %}
+                <td>No disponible</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

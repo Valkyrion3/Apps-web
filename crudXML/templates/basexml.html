@@ -1,0 +1,28 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Manejod de archivos XML </title>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Agrega tus enlaces a CSS y otros recursos aquí -->
+</head>
+<body>
+    <header>
+        <nav class="green darken-4">
+            <div class="nav-wrapper">
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        
+    </main>
+    <!-- Puedes incluir pie de página u otros elementos comunes aquí -->
+</body>
+</html>

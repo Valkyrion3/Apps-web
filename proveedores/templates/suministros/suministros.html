@@ -1,0 +1,54 @@
+<!-- suministros.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Contenido de la página de categorías -->
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col s-6"><h1>Listado de Suministros</h1></div>
+        </div>
+        <div class="row">
+            <div class="col s9"></div>
+            <div class="col s-2"><a class="waves-effect waves-light btn" href="{% url 'agregar_suministro' %}">Agregar Suministro</a></div>
+        </div>
+        <table>
+            <thead>
+              <tr>
+                  <th>Folio</th>
+                  <th>Proveedor</th>
+                  <th>Fecha</th>
+                  <th>Monto</th>
+                  <th>Estado</th>
+                  <th class="center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for suministro in suministros %}
+              <tr>
+                <td>{{ suministro.id }}</td>
+                <td>{{ suministro.proveedor.nombre }}</td>
+                <td>{{ suministro.fecha }}</td>
+                <td>{{ suministro.monto }}</td>
+                <td>
+                  {% if suministro.estado %}
+                      Activo
+                  {% else %}
+                      Inactivo
+                  {% endif %}
+                </td>
+                <td class="center">
+                  <!-- Botón para actualizar -->
+                  <a class="waves-effect waves-light btn" href="{% url 'actualizar_suministro' suministro.id %}">Actualizar</a>
+                  <!-- Botón para eliminar -->
+                  <form method="post" action="{% url 'eliminar_suministro' suministro.id %}" style="display: inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="waves-effect waves-light btn red">Eliminar</button>
+                  </form>
+              </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}

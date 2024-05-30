@@ -1,0 +1,56 @@
+<!-- piezas.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col s-6"><h1>Listado de Piezas</h1></div>
+    </div>
+    <div class="row">
+        <div class="col s9"></div>
+        <div class="col s-2"><a class="waves-effect waves-light btn" href="{% url 'agregar_pieza' %}">Agregar Pieza</a></div>
+    </div>
+    <table>
+        <thead>
+          <tr>
+              <th>Pieza</th>
+              <th>Color</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Stock</th>
+              <th>Estado</th>
+              <th class="center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for pieza in piezas %}
+          <tr>
+            <td>{{ pieza.nombre }}</td>
+            <td>{{ pieza.color }}</td>
+            <td>{{ pieza.precio }}</td>
+            <td>{{ pieza.categoria.nombre }}</td>
+            <td>{{ pieza.stock }}</td>
+            <td>
+              {% if pieza.estado %}
+                  Activo
+              {% else %}
+                  Inactivo
+              {% endif %}
+            </td>
+            <td class="center">
+              <!-- Botón para actualizar -->
+              <a class="waves-effect waves-light btn" href="{% url 'actualizar_pieza' pieza.id %}">Actualizar</a>
+              <!-- Botón para eliminar -->
+              <form method="post" action="{% url 'eliminar_pieza' pieza.id %}" style="display: inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="waves-effect waves-light btn red">Eliminar</button>
+              </form>
+          </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}

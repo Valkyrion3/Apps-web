@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .calc{
+        border: 3px solid #000;
+        padding: 20px;
+        width: 325px;
+        background: #eee;
+        box-shadow: 3px 3px 5px #999;
+        border-radius: 8px;
+        margin: auto;
+        text-align: center;
+    }
+    .pantalla {
+        background: linear-gradient(to bottom, #f0f0f0, #ffffff) !important;
+        border: 3px solid #3498db !important;
+        padding: 10px !important;
+        margin-bottom: 20px !important;
+        text-align: right !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 5px !important;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2) !important;
+    }
+    .num, .operador, .igual {
+        background-color: #f2f2f2;
+        border: none;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        width: 55px; 
+    }
+
+    .operador {
+        background-color: #6699b2;
+        color: white;
+        box-shadow: 0 4px #666;
+        font-weight: bold;
+        width: 55px;
+        border-radius: 5px;
+        text-shadow: 0 1px #666;
+    }
+    
+</style>
+<br>
+<div class="row">
+    <div class="col s4">
+        </div>
+        <div class="col s4 blue lighten-4"style="border: 3px solid #423; background-color:ligth-blue">
+
+            <form>
+                <table style="border: 2px solid ligth-blue; text-align:center;">
+                    <tr style="text-align:right;">
+                        <td colspan = "4" class="center">
+                            <input id="resultado" type="text" value="0" style="text-align: right; background-color: black; border:1px solid rgb(3, 87, 3); margin: auto; padding: 0px; color:white; font-size: 100%;" /><input id="memoria" type="hidden" value="0" />
+                        </td>
+                    </tr>
+                <tr style="text-align:center;">
+                <td class="center">
+                <input class="waves-effect btn cyan" type="button" value="7"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=7}else{ var str2='7'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="color:black; background-color:powderblue;">
+                </td>
+                <td class="center">
+                <input class="waves-effect waves-light btn purple" type="button" value="8"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=8}else{ var str2='8'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="waves-effect waves-light btn" type="button" value="9"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=9}else{ var str2='9'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="btn-floating btn-large pulse blue accent-3" type="button" value="/"
+                onClick="operaciones('dividir'); return false;"
+                style="width:55px">
+                </td>
+                </tr>
+                
+                <tr style="text-align:center;">
+                <td class="center">
+                <input class="waves-effect waves-light btn grey" type="button" value="4"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=4}else{ var str2='4'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="waves-effect waves-light btn green" type="button" value="5"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=5}else{ var str2='5'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="waves-effect waves-light btn brown" type="button" value="6"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=6}else{ var str2='6'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="btn-floating btn-large pulse purple darken-4" type="button" value="*"
+                onClick="operaciones('multiplicar'); return false;"
+                style="width:55px">
+                </td>
+                </tr>
+                
+                <tr style="text-align:center;">
+                <td class="center">
+                <input class="waves-effect waves-light btn yellow" type="button" value="1"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=1}else{ var str2='1'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="waves-effect waves-light btn pink" type="button" value="2"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=2}else{ var str2='2'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="btn-floating btn-large pulse waves-light btn black" type="button" value="3"
+                onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=3}else{ var str2='3'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                style="width:55px; color:rgb(255, 255, 255);">
+                </td>
+                <td class="center">
+                <input class="btn-floating btn-large pulse red darken-4" type="button" value="-" 
+                onClick="operaciones('restar'); return false;"
+                style="width:55px">
+                </td>
+                </tr>
+                
+                <tr style="text-align:center;">
+                    <td>
+                    </td>
+                <td class="center">
+                    <input class="btn-floating btn-large pulse lime darken-4" type="button" value="0" style="width:55px"
+                    onClick="var str1=document.getElementById('resultado').value; if(str1 == '0'){document.getElementById('resultado').value=0}else{ var str2='0'; var res = str1.concat(str2);document.getElementById('resultado').value=res;}"
+                    > 
+                </td>
+                <td class="center">
+                <input class="btn-floating waves-effect waves-light pulse red center" type="button" value="="
+                onClick="operaciones('igual'); return false;"
+                style="width:55px">
+                </td>
+                <td class="center">
+                <input class="btn-floating btn-large pulse teal darken-4" type="button" value="+"
+                onClick="operaciones('sumar'); return false;"
+                style="width:55px">
+                </td>
+                </tr>
+                
+                
+                </table>
+                
+                </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+    function operaciones(op)
+    {
+    
+        var ops = {
+            sumar: function sumarNumeros(n1, n2) {
+                return (parseInt(n1) + parseInt(n2));
+            },
+    
+            restar: function restarNumeros(n1, n2) {
+                return (parseInt(n1) - parseInt(n2));
+            },
+            
+            multiplicar: function multiplicarNumeros(n1, n2) {
+                return (parseInt(n1) * parseInt(n2));
+            },
+    
+            dividir: function dividirNumeros(n1, n2) {
+                return (parseInt(n1) / parseInt(n2));
+            }
+    
+    
+        };
+    
+        var operacion;
+    
+        switch(op) {
+            case 'sumar':
+                var operando1 = document.getElementById("resultado").value;
+                document.getElementById("resultado").value = operando1 + "+";
+                operacion = document.getElementById("resultado").value;
+                document.getElementById("memoria").value = "suma";
+                break;
+            case 'restar':
+                var operando1 = document.getElementById("resultado").value;
+                document.getElementById("resultado").value = operando1 + "-";
+                operacion = document.getElementById("resultado").value;
+                document.getElementById("memoria").value = "resta";
+                break;
+            case 'multiplicar':
+                var operando1 = document.getElementById("resultado").value;
+                document.getElementById("resultado").value = operando1 + "*";
+                operacion = document.getElementById("resultado").value;
+                document.getElementById("memoria").value = "multiplicacion";
+                break;
+            case 'dividir':
+                var operando1 = document.getElementById("resultado").value;
+                document.getElementById("resultado").value = operando1 + "/";
+                operacion = document.getElementById("resultado").value;
+                document.getElementById("memoria").value = "division";
+                break;
+                
+            case 'igual':	
+                
+                operacion = document.getElementById("resultado").value;
+                
+                var memoriaop = document.getElementById("memoria").value;
+                
+                switch(memoriaop) {
+                    case 'suma':
+                        var operandos = operacion.split("+");
+                        var resultado = ops.sumar(operandos[0], operandos[1]);
+                        document.getElementById("resultado").value = resultado;
+                        break;
+                    case 'resta':
+                        var operandos = operacion.split("-");
+                        var resultado = ops.restar(operandos[0], operandos[1]);
+                        document.getElementById("resultado").value = resultado;
+                        break;
+                    case 'multiplicacion':
+                        var operandos = operacion.split("*");
+                        var resultado = ops.multiplicar(operandos[0], operandos[1]);
+                        document.getElementById("resultado").value = resultado;
+                        break;
+                    case 'division':
+                        var operandos = operacion.split("/");
+                        var resultado = ops.dividir(operandos[0], operandos[1]);
+                        document.getElementById("resultado").value = resultado;
+                        break;					
+                
+                }	
+                
+    
+                break;
+                
+    
+        }
+    
+    
+    }
+    </script>
+{% endblock js %}

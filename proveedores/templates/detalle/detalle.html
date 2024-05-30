@@ -1,0 +1,48 @@
+<!-- categorias.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col s-6"><h1>Detalles</h1></div>
+    </div>
+    <div class="row">
+        <div class="col s9"></div>
+        <div class="col s-2"><a class="waves-effect waves-light btn" href="{% url 'agregar_detalle' %}">Agregar detalles</a></div>
+    </div>
+    <table>
+        <thead>
+          <tr>
+            <th>Suministro</th>
+            <th>Pieza</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+            <th class="center">Acciones</th> <!-- Agregamos una columna para las acciones -->
+          </tr>
+        </thead>
+        <tbody>
+        {% for detalle in detalles %}
+          <tr>
+            <td>{{ detalle.suministro.id }}</td>
+            <td>{{ detalle.pieza }}</td>
+            <td>{{ detalle.cantidad }}</td>
+            <td>{{ detalle.precio }}</td>
+            <td>{{ detalle.subtotal }}</td>
+            <td class="center">
+                <!-- Botón para actualizar -->
+                <a class="waves-effect waves-light btn" href="{% url 'actualizar_detalle' detalle.id %}">Actualizar</a>
+                <!-- Botón para eliminar -->
+                <form method="post" action="{% url 'eliminar_detalle' detalle.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="waves-effect waves-light btn red">Eliminar</button>
+                </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'basexml.html' %}
+
+{% block content %}
+  <h2>{{ file.name }}</h2>
+  <ul>
+    <li><strong>Color:</strong> {{ car_data.color }}</li>
+    <li><strong>Textura:</strong> {{ car_data.textura }}</li>
+    <li><strong>Precio:</strong> {{ car_data.precio }}</li>
+    <li><strong>Modelo:</strong> {{ car_data.modelo }}</li>
+    <li><strong>Marca:</strong> {{ car_data.marca }}</li>
+    <li><strong>Potencia:</strong> {{ car_data.potencia }}</li>
+    <li><strong>Vel. Max:</strong> {{ car_data.vel_max }}</li>
+    <li><strong>Tipo de Transmisión:</strong> {{ car_data.tipo_transmision }}</li>
+    <li><strong>Tipo de Combustible:</strong> {{ car_data.tipo_combustible }}</li>
+  </ul>
+  <a class="btn pink darken-4" href="{% url 'xmlfile_edit' file.pk %}">Editar</a> |
+  <a class="btn grey darken-3" href="{% url 'xmlfile_list' %}">Volver a la lista</a>
+{% endblock %}

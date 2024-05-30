@@ -1,0 +1,11 @@
+{% extends "basexml.html" %}
+
+{% block content %}
+  <h2>Eliminar Archivo XML</h2>
+  <p>¿Estás seguro de que deseas eliminar el archivo "{{ file.name }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn red darken-4" type="submit">Eliminar</button>
+    <a class="btn" href="{% url 'xmlfile_list' %}">Cancelar</a>
+  </form>
+{% endblock %}

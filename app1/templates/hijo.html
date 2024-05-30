@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+
+    <form action="{% url 'post_agregar' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="modal-content">
+            <center><h4 >Agregar registro</h4></center>
+            <br/>
+            <!--<input id="usuario_que_recibio" type="hidden" name="pk" value="{{request.user.id}}">
+             <input id="usuario_que_recibio" type="hidden" name="pk" value="{{request.user.id}}">
+            <tr><th><label for="id_trabajador"></label></th><td><input type="hidden" name="id_trabajador" value="{{request.user.id}}" maxlength="60" required id="id_trabajador"></td></tr> -->
+            
+                {{ pan.as_p}}
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn modal-close waves-effect waves-green grey btn-small right">Cancelar</button>
+            <button type="submit" class="btn waves-effect waves-green green right">Agregar</a>
+        </div>
+    </form>
+
+</div>
+ 
+
+ 
+{% endblock %}

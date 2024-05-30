@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App numeros</title>
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <h6>Numero 1</h6>
+            <input id="num1" name="num1" type="number">
+            <h6>Numero 2</h6>
+            <input id="num2" name="num2" type="number">
+            <h6>Numero 3</h6>
+            <input id="num3" name="num3" type="number">
+            <button type="submit">Aceptar</button>
+        </form>
+    </div>
+</body>
+<script>
+    window.postMessage = function() {
+        alert("La suma es mayor a 50");
+    };
+</script>
+</html>

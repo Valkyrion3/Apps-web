@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<coche><color>GRIS</color><textura>METALICA</textura><precio>2000.00</precio><modelo>A4</modelo><marca>AUDIO</marca><potencia>200</potencia><vel_max>300</vel_max><tipo_transmision>AUTOMATICA</tipo_transmision><tipo_combustible>DIESEL</tipo_combustible></coche>

@@ -1,0 +1,12 @@
+{% extends "basexml.html" %}
+
+{% block content %}
+  <h2>Crear Nuevo Archivo XML</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn " type="submit">Crear</button>
+  </form>
+  <br>
+  <a class="btn red darken-4" href="{% url 'xmlfile_list' %}">Cancelar</a>
+{% endblock %}

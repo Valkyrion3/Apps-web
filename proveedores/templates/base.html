@@ -1,0 +1,40 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración de suministros </title>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Agrega tus enlaces a CSS y otros recursos aquí -->
+</head>
+<body>
+    <header>
+        <nav class="blue darken-4">
+            <div class="nav-wrapper">
+                <a href="{% url 'home' %}" class="brand-logo">Suministros VLK</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{% url 'home' %}">Inicio</a></li>
+                    <li><a href="{% url 'categorias' %}">Categorías</a></li>
+                    <li><a href="{% url 'piezas' %}">Piezas</a></li>
+                    <li><a href="{% url 'proveedores' %}">Proveedores</a></li>
+                    <li><a href="{% url 'suministros' %}">Suministros</a></li>
+                    <li><a href="{% url 'detalles' %}">Detalles</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- Puedes incluir pie de página u otros elementos comunes aquí -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+    </script>
+</body>
+</html>

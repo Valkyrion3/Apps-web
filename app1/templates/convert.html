@@ -1,0 +1,119 @@
+{% extends "base.html" %}  <!--Hereda de un layout base llamado base.html, que probablemente contiene elementos comunes como el header, footer, etc.-->
+
+{% block content %}  <!-- Define un bloque de contenido que se insertará en el layout base donde se especifique este bloque.-->
+<div style="margin-top: 20px;">
+    <div class="container convert">
+        <h1>Convertidor Numérico</h1>
+        <form id="conversor">
+            <label for="numberInput">Número:</label><!--Etiqueta para el campo de entrada.-->
+            <input type="text" id="numEntrada" class="col s3">  <!-- Campo de entrada para el número a convertir.-->
+            <br>  <!-- Salto de línea para separar elementos.-->
+            <select class="waves-effect waves-light" id="SistemaNum">  <!-- Selector para elegir el sistema numérico destino.-->
+                <option value="decimal">Decimal</option>  <!-- Opción decimal.-->
+                <option value="binario">Binario</option>  <!-- Opción binaria.-->
+                <option value="octal">Octal</option>  <!-- Opción octal.-->
+                <option value="hexadecimal">Hexadecimal</option>  <!-- Opción hexadecimal.-->
+            </select>
+            <br><br> 
+            <button type="submit" class="waves-effect waves-light btn">Convertir</button> 
+        </form>
+        <div id="results">
+            
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block js %} 
+    <script>
+        document.getElementById('conversor').addEventListener('submit', function(event) {  // Agrega un manejador de eventos al formulario para capturar el envío.
+        event.preventDefault();  // Previene el comportamiento por defecto del envío del formulario (recargar la página).
+        var numberInput = document.getElementById('numEntrada').value;  // Obtiene el valor ingresado en el campo de texto.
+        var sistnum = document.getElementById('SistemaNum').value;  // Obtiene el sistema numérico seleccionado.
+
+        if (!validarEntrada(numberInput, sistnum)) {  // Llama a una función para validar la entrada según el sistema numérico.
+            alert("Entrada no válida para el sistema seleccionado.");  // Muestra una alerta si la entrada no es válida.
+            document.getElementById('numEntrada').classList.add('invalid-input'); // Aplica el estilo de entrada inválida
+            return;  // Termina la ejecución si la entrada no es válida.
+        } else {
+            document.getElementById('numEntrada').classList.remove('invalid-input'); // Remueve el estilo de entrada inválida si es válida
+        }
+
+        switch(sistnum) {  // Dependiendo del sistema numérico seleccionado, realiza las conversiones correspondientes.
+            case 'decimal':
+                var decimal = numberInput;  // Asigna el número ingresado a la variable decimal.
+                var binario = decimalToBinary(numberInput);  // Convierte de decimal a binario.
+                var octal = decimalToOctal(numberInput);  // Convierte de decimal a octal.
+                var hexadecimal = decimalToHexadecimal(numberInput);  // Convierte de decimal a hexadecimal.
+                break;
+            case 'binario':
+                var decimal = binaryToDecimal(numberInput);  // Convierte de binario a decimal.
+                var binario = numberInput;  // Asigna el número ingresado a la variable binario.
+                var octal = decimalToOctal(decimal);  // Convierte el decimal obtenido a octal.
+                var hexadecimal = decimalToHexadecimal(decimal);  // Convierte el decimal obtenido a hexadecimal.
+                break;
+            case 'octal':
+                var decimal = octalToDecimal(numberInput);  // Convierte de octal a decimal.
+                var binario = decimalToBinary(decimal);  // Convierte el decimal obtenido a binario.
+                var octal = numberInput;  // Asigna el número ingresado a la variable octal.
+                var hexadecimal = decimalToHexadecimal(decimal);  // Convierte el decimal obtenido a hexadecimal.
+                break;
+            case 'hexadecimal':
+                var decimal = hexadecimalToDecimal(numberInput);  // Convierte de hexadecimal a decimal.
+                var binario = decimalToBinary(decimal);  // Convierte el decimal obtenido a binario.
+                var octal = decimalToOctal(decimal);  // Convierte el decimal obtenido a octal.
+                var hexadecimal = numberInput;  // Asigna el número ingresado a la variable hexadecimal.
+                break;
+        }
+
+        document.getElementById('results').innerHTML =   // Actualiza el contenido del div de resultados con los valores convertidos.
+            `<h5>Decimal: ${decimal}</h5>
+            <h5>Binario: ${binario}</h5>
+            <h5>Octal: ${octal}</h5>
+            <h5>Hexadecimal: ${hexadecimal}</h5>
+        `;
+    });
+
+    function validarEntrada(entrada, sistema) {  // Función para validar la entrada según el sistema numérico.
+            switch(sistema) {
+                case 'decimal':
+                    return /^[0-9]+$/.test(entrada);  // Regex para validar números decimales.
+                case 'binario':
+                    return /^[01]+$/.test(entrada);  // Regex para validar números binarios.
+                case 'octal':
+                    return /^[0-7]+$/.test(entrada);  // Regex para validar números octales.
+                case 'hexadecimal':
+                    return /^[0-9A-Fa-f]+$/.test(entrada);  // Regex para validar números hexadecimales.
+                default:
+                    return false;  // Si no es ninguno de los anteriores, retorna falso.
+            }
+        }
+
+    function decimalToBinary(decimal) {  // Función para convertir decimal a binario.
+        return (decimal >> 0).toString(2);
+    }
+
+    function decimalToOctal(decimal) {  // Función para convertir decimal a octal.
+        return (decimal >> 0).toString(8);
+    }
+
+    function decimalToHexadecimal(decimal) {  // Función para convertir decimal a hexadecimal.
+        return (decimal >> 0).toString(16).toUpperCase();
+    }
+
+    function binaryToDecimal(binary) {  // Función para convertir binario a decimal.
+        return parseInt(binary, 2);
+    }
+
+    function octalToDecimal(octal) {  // Función para convertir octal a decimal.
+        return parseInt(octal, 8);
+    }
+
+    function hexadecimalToDecimal(hexadecimal) {  // Función para convertir hexadecimal a decimal.
+        return parseInt(hexadecimal, 16);
+    }
+    function igual(igual) {  // Función que convierte una cadena a un número entero (no parece usarse).
+        return parseInt(igual);
+    }
+    </script>
+{% endblock %}

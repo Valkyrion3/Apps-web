@@ -1,0 +1,55 @@
+<!-- proveedores.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col s-6"><h1>Listado de Proveedores</h1></div>
+    </div>
+    <div class="row">
+        <div class="col s9"></div>
+        <div class="col s-2"><a class="waves-effect waves-light btn" href="{% url 'agregar_proveedor' %}">Agregar Proveedor</a></div>
+    </div>
+    <table>
+        <thead>
+          <tr>
+              <th>Proveedor</th>
+              <th>Direccion</th>
+              <th>Número</th>
+              <th>Ciudad</th>
+              <th>Provincia</th>
+              <th>Estado</th>
+              <th class="center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for proveedor in proveedores %}
+          <tr>
+            <td>{{ proveedor.nombre }}</td>
+            <td>{{ proveedor.direccion }}</td>
+            <td>{{ proveedor.numero }}</td>
+            <td>{{ proveedor.ciudad }}</td>
+            <td>{{ proveedor.provinicia }}</td>
+            <td>
+              {% if proveedor.estado %}
+                  Activo
+              {% else %}
+                  Inactivo
+              {% endif %}
+            </td>
+            <td class="center">
+              <!-- Botón para actualizar -->
+              <a class="waves-effect waves-light btn" href="{% url 'actualizar_proveedor' proveedor.id %}">Actualizar</a>
+              <!-- Botón para eliminar -->
+              <form method="post" action="{% url 'eliminar_proveedor' proveedor.id %}" style="display: inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="waves-effect waves-light btn red">Eliminar</button>
+              </form>
+          </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}
